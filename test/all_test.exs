@@ -8,30 +8,46 @@ defmodule Tests do
       ["A",["aAA","BB"]],
       ["B",["","asd"]],
       ["C",["ABC","b"]],
-    ]
+    ]|> Enum.sort()
 
     grammar2 = [
       ["P",["ABC","bCC"]],
       ["A",["aAA","BB"]],
       ["B",[""]],
       ["C",["ABC","b"]],
-    ]
+    ]|> Enum.sort()
+
+    grammar3 =[
+      #Exemplo retirado do video em aula
+    ["S", ["ASA", "ab"]],
+    ["A", ["B", "S"]],
+    ["B", ["b", ""]]
+]|> Enum.sort()
 
     esperado1 = [
       ["P", ["ABC", "BC", "AC", "C", "bCC"]],
       ["A", ["aAA", "aA", "a", "BB", "B"]],
       ["B", ["asd"]],
       ["C", ["ABC", "BC", "AC", "C", "b"]]
-    ]
+    ]|> Enum.sort()
 
     esperado2 = [
       ["P", ["AC", "C", "bCC"]],
       ["A", ["aAA", "aA", "a"]],
       ["C", ["AC", "C", "b"]]
-    ]
+    ]|> Enum.sort()
+
+    esperado3 = [
+      #Exemplo retirado do video em aula
+      ["S", ["ASA", "AS", "SA", "S", "ab"]],
+      ["A", ["B", "S"]],
+      ["B", ["b"]]
+  ]|> Enum.sort()
+
 
     assert Enum.sort(esperado1) == Enum.sort(RemoveNulo.remove_nulos(grammar1))
     assert Enum.sort(esperado2) == Enum.sort(RemoveNulo.remove_nulos(grammar2))
+    assert Enum.sort(esperado3) == Enum.sort(RemoveNulo.remove_nulos(grammar3))
   end
 
   test "Remover Regras de producao unitarias" do
